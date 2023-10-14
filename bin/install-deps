@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -e
+
+source .venv/bin/activate
+
+python -m piptools sync requirements.txt
+
+rm -rf datacampexam.egg-info

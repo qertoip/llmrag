@@ -1,0 +1,12 @@
+.idea
+*.iml
+data
+__pycache__
+.venv
+model/*.bak
+
+docs
+llmrag/remove
+test/remove
+config
+gradio_cached_examples
