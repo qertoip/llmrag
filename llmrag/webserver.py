@@ -1,32 +1,32 @@
-import os
-
 import gradio
 
-
-def yes_man(message, history):
-    if message.endswith("?"):
-        return "Yes"
-    else:
-        return "Ask me anything!"
+from assistants import dummy_assistant
+from assistants import llm_assistant
 
 
 def main():
     gradio_ui = gradio.ChatInterface(
-        yes_man,
-        chatbot=gradio.Chatbot(height=300),
-        textbox=gradio.Textbox(placeholder="Ask me a yes or no question!", container=False, scale=7),
-        title="Yes Man",
-        description="Ask Yes Man any question",
+        llm_assistant.answer_question,
+        chatbot=gradio.Chatbot(height=512, show_label=False, show_copy_button=True),
+        textbox=gradio.Textbox(placeholder="Please ask a question", container=False, scale=7),
+        title="Corp 🕮 Assistant",
+        description="👨 Ask anything <strong>work</strong> related.",
         theme="soft",
-        examples=["Hello", "Am I cool?", "Are tomatoes vegetables?"],
-        cache_examples=True,
+        examples=[
+            'What is SageMaker?',
+            'What are all AWS regions where SageMaker is available?',
+            'How to check if an endpoint is KMS encrypted?',
+            'What are SageMaker Geospatial capabilities?',
+        ],
+        cache_examples=False,
         retry_btn=None,
+        submit_btn='Submit 🚀',
         undo_btn="Delete Previous",
         clear_btn="Clear",
+        css="footer{ display:none !important }"
     )
 
-    #port = int(os.environ.get("PORT"))
-    gradio_ui.launch(server_name='0.0.0.0', server_port=8080)
+    gradio_ui.launch(server_name='127.0.0.1', server_port=8080)
 
 
 if __name__ == '__main__':

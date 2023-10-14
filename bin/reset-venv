@@ -6,7 +6,7 @@ echo 'Deleting existing .venv ...'
 rm -rf .venv
 
 echo 'Creating fresh .venv ...'
-python -m venv .venv
+python3 -m venv .venv
 source .venv/bin/activate
 
 echo 'Upgrading pip ...'
