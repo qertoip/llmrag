@@ -15,12 +15,19 @@ class LocalUniversalSentenceEncoder(Embedder):
 
     def __init__(self):
         # load one of the models: ['en_use_md', 'en_use_lg', 'xx_use_md', 'xx_use_lg']
-        #variant = 'en_use_lg'
-        variant = 'en_use_cmlm_lg'
+        variant = 'en_use_lg'
+        #variant = 'en_use_cmlm_lg'
         log.info(f'Loading model from tfhub.dev ({variant})')
         self.encoder_model = spacy_universal_sentence_encoder.load_model(variant)
 
     def create_embedding(self, text: str) -> np.ndarray:
+        clean_text = self.clean(text)
+        embedding = self.encoder_model(clean_text)
+        # unit_embedding = unit_vector(embedding)
+        # return unit_embedding
+        return embedding
+
+
         # sentences = text.split('.')
         # embeddings = []
         # for sentence in sentences:
@@ -35,9 +42,3 @@ class LocalUniversalSentenceEncoder(Embedder):
         #     embeddings.append(embedding)
         # mean_embedding = mean_vector(embeddings)
         # unit_embedding = unit_vector(mean_embedding)
-
-        for stopword in ['**Note**', '**Topics**', '**']:
-            text = text.replace(stopword, '')
-        embedding = self.encoder_model(text)
-        unit_embedding = unit_vector(embedding)
-        return unit_embedding

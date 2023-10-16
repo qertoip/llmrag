@@ -7,7 +7,8 @@ import numpy as np
 
 from chunkers.markdown_headings_chunker import MarkdownHeadingsChunker
 from embedders.aws_universal_sentence_encoder_cmlm import AwsUniversalSentenceEncoderCMLM
-from embedders.local_universal_sentence_encoder import LocalUniversalSentenceEncoder
+from embedders.local_all_mpnet_base_v2 import LocalAllMpnetBaseV2
+#from embedders.local_universal_sentence_encoder import LocalUniversalSentenceEncoder
 from vectordbs.chroma_vector_db import ChromaVectorDB
 
 from tools import kb_path, setup_logging, root_path, chunk_id
@@ -17,8 +18,9 @@ def main():
     setup_logging('index_kb.log')
 
     chunker = MarkdownHeadingsChunker()
-    embedder = AwsUniversalSentenceEncoderCMLM()
+    #embedder = AwsUniversalSentenceEncoderCMLM()
     #embedder = LocalUniversalSentenceEncoder()
+    embedder = LocalAllMpnetBaseV2()
     vectordb = ChromaVectorDB()
     
     documents_filepaths = list(kb_path().rglob('*.md'))
@@ -31,6 +33,7 @@ def main():
         log.info(f'    -> {len(chunks)} chunks')
 
         for chunk_i, chunk in enumerate(chunks):
+            embedding = embedder.create_embedding(chunk)
             if not chunk in vectordb:
                 embedding = embedder.create_embedding(chunk)
                 vectordb.insert(

@@ -4,14 +4,16 @@ from assistants.dummy_assistant import DummyAssistant
 from assistants.kbonly_assistant import KBOnlyAssistant
 from embedders.aws_universal_sentence_encoder_cmlm import AwsUniversalSentenceEncoderCMLM
 from embedders.local_universal_sentence_encoder import LocalUniversalSentenceEncoder
+from embedders.local_all_mpnet_base_v2 import LocalAllMpnetBaseV2
 from vectordbs.chroma_vector_db import ChromaVectorDB
 
 
 def main():
     dummy_assistant = DummyAssistant()
 
-    embedder = AwsUniversalSentenceEncoderCMLM()
+    #embedder = AwsUniversalSentenceEncoderCMLM()
     #embedder = LocalUniversalSentenceEncoder()
+    embedder = LocalAllMpnetBaseV2()
     vectordb = ChromaVectorDB()
     kbonly_assistant = KBOnlyAssistant(embedder=embedder, vectordb=vectordb)
 
@@ -39,7 +41,11 @@ def main():
         submit_btn='Submit 🚀',
         undo_btn="Delete Previous",
         clear_btn="Clear",
-        css="footer{ display:none !important }"
+        css="""
+            footer { display:none !important }
+            h1 { font-size: 2em !important }
+            h2 { font-size: 1.6em !important }
+        """
     )
     gradio_ui.launch(server_name='127.0.0.1', server_port=8080)
 
