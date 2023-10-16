@@ -1,6 +1,6 @@
 import numpy as np
 import chromadb
-from chromadb.utils import embedding_functions
+from chromadb import Settings
 
 from tools import root_path, chunk_id, UNBOLD, BOLD
 from vectordbs.vector_db import VectorDB, Item
@@ -12,10 +12,10 @@ class ChromaVectorDB(VectorDB):
     def __init__(self, collection_name='main7'):
         chroma_dir = (root_path() / 'db' / 'chroma')
         chroma_dir.mkdir(parents=True, exist_ok=True)
-        self.client = chromadb.PersistentClient(str(chroma_dir))
-        #ef = ef.DefaultEmbeddingFunction()
-        #ef = embedding_functions.SentenceTransformerEmbeddingFunction('all-MiniLM-L6-v2')
-        #ef = embedding_functions.SentenceTransformerEmbeddingFunction(model_name='all-mpnet-base-v2')
+        self.client = chromadb.PersistentClient(
+            path=str(chroma_dir),
+            settings=Settings(anonymized_telemetry=False)
+        )
         self.collection = self.client.get_or_create_collection(collection_name)
 
     def insert(self, id: str, embedding: list | np.ndarray, text: str, metadata: dict):

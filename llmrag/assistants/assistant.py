@@ -4,7 +4,7 @@ from abc import ABC, abstractmethod
 class Assistant(ABC):
 
     @abstractmethod
-    def answer_question(self, s: str, history=None) -> str:
+    def answer_question(self, question: str, history=None) -> str:
         ...
 
     def __call__(self, *args, **kwargs):

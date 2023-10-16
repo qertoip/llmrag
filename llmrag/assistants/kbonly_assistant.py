@@ -20,8 +20,10 @@ class KBOnlyAssistant(Assistant):
         chunks = self.vectordb.query(embedding, top=6)
         texts = [c.text for c in chunks]
         answer = '\n\n'.join(texts)
+
         filenames = [f'* {c.filename}\n' for c in chunks]
         sources = "\n\n## Sources:\n" + ''.join(filenames)
+
         answer += sources
         return answer
 
@@ -44,9 +46,3 @@ if __name__ == '__main__':
     #q = 'Buy a model'
     answer = kbonly_assistant.answer_question(q)
     print(answer)
-
-
-# template = """Use the following pieces of context to answer the question at the end. If you don't know the answer, just say that you don't know, don't try to make up an answer. Use three sentences maximum. Keep the answer as concise as possible. Always say "thanks for asking!" at the end of the answer.
-# {context}
-# Question: {question}
-# Helpful Answer:"""
