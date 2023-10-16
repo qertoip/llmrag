@@ -1,13 +1,29 @@
 import gradio
 
-from assistants import dummy_assistant
-from assistants import llm_assistant
+from assistants.dummy_assistant import DummyAssistant
+from assistants.kbonly_assistant import KBOnlyAssistant
+from embedders.aws_universal_sentence_encoder_cmlm import AwsUniversalSentenceEncoderCMLM
+from embedders.local_universal_sentence_encoder import LocalUniversalSentenceEncoder
+from vectordbs.chroma_vector_db import ChromaVectorDB
 
 
 def main():
+    dummy_assistant = DummyAssistant()
+
+    embedder = AwsUniversalSentenceEncoderCMLM()
+    #embedder = LocalUniversalSentenceEncoder()
+    vectordb = ChromaVectorDB()
+    kbonly_assistant = KBOnlyAssistant(embedder=embedder, vectordb=vectordb)
+
     gradio_ui = gradio.ChatInterface(
-        llm_assistant.answer_question,
-        chatbot=gradio.Chatbot(height=512, show_label=False, show_copy_button=True),
+        fn=kbonly_assistant,
+        chatbot=gradio.Chatbot(
+            height=1024,
+            show_label=False,
+            show_copy_button=False,
+            sanitize_html=False,
+            render_markdown=True
+        ),
         textbox=gradio.Textbox(placeholder="Please ask a question", container=False, scale=7),
         title="Corp 🕮 Assistant",
         description="👨 Ask anything <strong>work</strong> related.",
@@ -25,7 +41,6 @@ def main():
         clear_btn="Clear",
         css="footer{ display:none !important }"
     )
-
     gradio_ui.launch(server_name='127.0.0.1', server_port=8080)
 
 
