@@ -6,6 +6,8 @@ from assistants.llmonly_assistant import LlmOnlyAssistant
 from assistants.llmrag_assistant import LlmRagAssistant
 from embedders.aws_universal_sentence_encoder_cmlm import AwsUniversalSentenceEncoderCMLM
 from embedders.local_all_mpnet_base_v2 import LocalAllMpnetBaseV2
+from llms.aws_llama2 import AwsLlama2
+from llms.replicate_llama2 import ReplicateLlama2
 from vectordbs.chroma_vector_db import ChromaVectorDB
 
 
@@ -15,10 +17,13 @@ def main():
 
     vectordb = ChromaVectorDB()
 
+    #llm = AwsLlama2()
+    llm = ReplicateLlama2()
+
     #assistant = DummyAssistant()
     #assistant = KBOnlyAssistant(embedder=embedder, vectordb=vectordb)
     #assistant = LlmOnlyAssistant()
-    assistant = LlmRagAssistant(embedder=embedder, vectordb=vectordb)
+    assistant = LlmRagAssistant(embedder=embedder, vectordb=vectordb, llm=llm)
 
     gradio_ui = gradio.ChatInterface(
         fn=assistant,

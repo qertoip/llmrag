@@ -1,0 +1,2 @@
+This is company internal knowledge base (KB) represented as flat directory of Markdown (*.md) files.
+It serves as source data for the assistant to build the embeddings.

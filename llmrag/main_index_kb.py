@@ -31,7 +31,6 @@ def main():
         log.info(f'    -> {len(chunks)} chunks')
 
         for chunk_i, chunk in enumerate(chunks):
-            embedding = embedder.create_embedding(chunk)
             if not chunk in vectordb:
                 embedding = embedder.create_embedding(chunk)
                 vectordb.insert(
@@ -43,6 +42,8 @@ def main():
                 log.info(f'    -> added chunk {chunk_id(chunk)}')
             else:
                 log.info(f'    -> present chunk {chunk_id(chunk)}')
+
+        # TODO: vectordb garbage collection - remove chunks no longer present in KB
 
 
 if __name__ == '__main__':

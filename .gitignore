@@ -10,8 +10,7 @@ llmrag/remove
 test/remove
 config/*key*
 gradio_cached_examples
-db/chroma/*
-db/chroma.bak*
+#db/chroma/*
+#db/chroma.bak*
+#db/kb
 log/*
-
-db/kb

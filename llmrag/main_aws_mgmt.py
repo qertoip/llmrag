@@ -21,7 +21,26 @@ def delete_endpoints():
         except Exception as e:
             print(e)
 
+def print_models():
+    sagemaker_client = boto3.client('sagemaker', region_name='us-east-1')
+    response = sagemaker_client.list_models()
+    for model in response['Models']:
+        model_name = model['ModelName']
+        print(model_name)
+
+
+def delete_models():
+    sagemaker_client = boto3.client('sagemaker', region_name='us-east-1')
+    response = sagemaker_client.list_models()
+    for model in response['Models']:
+        model_name = model['ModelName']
+        print(f"Deleting model: {model_name}")
+        sagemaker_client.delete_model(ModelName=model_name)
+
 
 if __name__ == '__main__':
-    print_endpoints()
+    #print_endpoints()
     #delete_endpoints()
+
+    print_models()
+    delete_models()
