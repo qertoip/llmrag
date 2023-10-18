@@ -18,7 +18,7 @@ Deployed on AWS: https://llmrag.qertoip.com/
   * Integrated local vector database (ChromaDB)
   * Integrated free LLM API by replicate.com (only for non-proprietary data)
 
-* Loosly coupled and easily swappable components:
+* Loosely coupled and easily swappable components:
   * Chunker
   * Embedder
   * VectorDB
