@@ -11,49 +11,18 @@ dependencies = [
   'sagemaker',
   'replicate',
   'gradio',
-#  'spacy-universal-sentence-encoder',
   'chromadb',
   'sentence_transformers',
-#  'scikit-learn >= 1.3',
-#  'pandas > 2',
-#  'scipy > 1.11',
-#  'statsmodels',
-#  'matplotlib > 3.7',
-#  'seaborn > 0.12',
-
-  #'more-itertools',
-  #'openai',
-  
-  #'IPython',
-  #'notebook',
-  #'nbformat',
-  #'nbconvert',
-  #'jupytext',
-  #'watchdog',
-  
-  #'xgboost',
-  #'catboost',
-  #'imbalanced-learn',
-  
-  #'kaggle',
-  #'doit',
-  #'python-ulid',
-  #'pydantic',
-  #'peewee',
-  #'keyring',
-  #'platformdirs',
 ]
 
 [project.optional-dependencies]
 dev = [
   'pytest',
   'awscli',
-  #'rich'
-  
   #'black',
   #'mypy',
   #'pylint'
-  #'diskcache',
-
-  #'watchdog',
 ]
+
+[tool.pytest.ini_options]
+addopts = '--noconftest'

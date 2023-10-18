@@ -2,6 +2,7 @@ import hashlib
 import sys
 from pathlib import Path
 import logging
+from typing import Iterable
 
 import numpy as np
 from numpy.linalg import norm
@@ -11,10 +12,6 @@ BOLD, UNBOLD = '\033[1m', '\033[0m'
 
 def root_path() -> Path:
     return Path(__file__).parent.parent.absolute()
-
-
-def chunk_id(s: str):
-    return hashlib.sha3_256(s.encode('utf-8')).hexdigest()
 
 
 def kb_path() -> Path:
@@ -56,3 +53,12 @@ def cosine_similarity(v1: np.ndarray, v2: np.ndarray) -> float:
     dot_product = v1.dot(v2)
     length_normalization = norm(v1, ord=2) * norm(v2, ord=2)  # L2
     return dot_product / length_normalization
+
+
+def chunk_id(s: str):
+    return hashlib.sha3_256(s.encode('utf-8')).hexdigest()
+
+
+def unique(iterable: Iterable) -> list:
+    """Return unique elements while maintaining order (can't simply use set)."""
+    return list(dict.fromkeys(iterable if iterable is not None else []))

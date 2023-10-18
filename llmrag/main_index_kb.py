@@ -8,7 +8,6 @@ import numpy as np
 from chunkers.markdown_headings_chunker import MarkdownHeadingsChunker
 from embedders.aws_universal_sentence_encoder_cmlm import AwsUniversalSentenceEncoderCMLM
 from embedders.local_all_mpnet_base_v2 import LocalAllMpnetBaseV2
-#from embedders.local_universal_sentence_encoder import LocalUniversalSentenceEncoder
 from vectordbs.chroma_vector_db import ChromaVectorDB
 
 from tools import kb_path, setup_logging, root_path, chunk_id
@@ -19,7 +18,6 @@ def main():
 
     chunker = MarkdownHeadingsChunker()
     #embedder = AwsUniversalSentenceEncoderCMLM()
-    #embedder = LocalUniversalSentenceEncoder()
     embedder = LocalAllMpnetBaseV2()
     vectordb = ChromaVectorDB()
     

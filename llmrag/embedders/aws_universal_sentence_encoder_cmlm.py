@@ -8,15 +8,21 @@ from embedders.embedder import Embedder
 
 
 class AwsUniversalSentenceEncoderCMLM(Embedder):
-    
+    """
+    Get embeddings by calling our own AWS SageMaker Endpoint with deployed embeddings model: Universal Sentence Encoder CMLM.
+
+    This is just to show AWS SageMaker Endpoint integration.
+
+    The embeddings model was picked to minimize the costs.
+    The target model could be something much more powerful like GPT-J 6B Embedding.
+    """
     aws_client = None
 
     def __init__(self):
         self.aws_client = boto3.client('runtime.sagemaker')
 
     def create_embedding(self, text: str) -> np.ndarray:
-        for stopword in ['**Note**', '**Topics**', '**']:
-            text = text.replace(stopword, '')
+        text = self.clean(text)
         response = self._query_endpoint(text)
         embedding, _ = self._parse_response(response)
         unit_embedding = unit_vector(embedding)

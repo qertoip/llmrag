@@ -15,20 +15,12 @@ class Embedder(ABC):
         ...
 
     def clean(self, text):
+        # TODO: this is very basic, more can be done to clean for embedding generation
+
         # Remove Markdown links like (https://...)
         text = re.sub(self.link_in_parentheses_regex, '', text)
-        for stopword in ['**Note**', '**Topics**', '**', '#### ', '### ', '## ', '[', ']']:
-            text = text.replace(stopword, '')
+
+        # Remove Markdown formatting and some useless words
+        for noise in ['**Note**', '**Topics**', '**', '#### ', '### ', '## ', '[', ']']:
+            text = text.replace(noise, '')
         return text
-
-
-# class Concrete(Embedder):
-#     def create_embedding(self, text: str) -> np.ndarray:
-#         pass
-#
-#
-# if __name__ == '__main__':
-#     e = Concrete()
-#     text = (kb_path() / 'aws-properties-sagemaker-inferenceexperiment-capturecontenttypeheader.md').read_text()
-#     text = e.clean(text)
-#     print(text)

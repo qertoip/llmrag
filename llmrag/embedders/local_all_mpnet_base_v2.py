@@ -1,14 +1,16 @@
 import os
 
 import numpy as np
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  # silence TF logging (must be run before importing tf/keras)
 from chromadb.utils import embedding_functions
-
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  # silence TF logging (must be run before importing tf/keras/spacy)
 from embedders.embedder import Embedder
-from tools import unit_vector, mean_vector
 
 
 class LocalAllMpnetBaseV2(Embedder):
+    """
+    Get embeddings from local embeddings model all-mpnet-base-v2.
+    Great for quick local experimentation w/o incurring costs.
+    """
 
     encoder_model = None
 
@@ -17,7 +19,7 @@ class LocalAllMpnetBaseV2(Embedder):
 
     def create_embedding(self, text: str) -> np.ndarray:
         clean_text = self.clean(text)
-        embedding = self.encoder_model([clean_text])[0]
-        #unit_embedding = unit_vector(embedding)
-        #return unit_embedding
+        # all-mpnet-base-v2 returns unit vectors so no need to normalize
+        embedding_seq = self.encoder_model([clean_text])[0]
+        embedding = np.array(embedding_seq)
         return embedding
