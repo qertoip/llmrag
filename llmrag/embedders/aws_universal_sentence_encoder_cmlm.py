@@ -13,8 +13,8 @@ class AwsUniversalSentenceEncoderCMLM(Embedder):
 
     This is just to show AWS SageMaker Endpoint integration.
 
-    The embeddings model was picked to minimize the costs.
-    The target model could be something much more powerful like GPT-J 6B Embedding.
+    This AWS embeddings model was picked to cut down on $$$ for PoC.
+    The target model might be something much more powerful like GPT-J 6B Embedding.
     """
     aws_client = None
 
@@ -24,7 +24,8 @@ class AwsUniversalSentenceEncoderCMLM(Embedder):
     def create_embedding(self, text: str) -> np.ndarray:
         text = self.clean(text)
         response = self._query_endpoint(text)
-        embedding, _ = self._parse_response(response)
+        embedding_as_list, _ = self._parse_response(response)
+        embedding = np.array(embedding_as_list)
         unit_embedding = unit_vector(embedding)
         return unit_embedding
 

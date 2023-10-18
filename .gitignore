@@ -8,11 +8,10 @@ model/*.bak
 docs
 llmrag/remove
 test/remove
-config
+config/*key*
 gradio_cached_examples
 db/chroma/*
 db/chroma.bak*
 log/*
 
 db/kb
-
