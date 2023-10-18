@@ -14,7 +14,7 @@ Deployed on AWS: https://llmrag.qertoip.com/
   * Deployed on **EC2**
   * Uses **SageMaker Endpoints** for:
     * Text embeddings model
-    * LLM model
+    * Generative LLM model
   * Architecture open to integrate a production-grade vector DB (AWS RDS/pg_vector, AWS OpenSearch k-NN, etc)
 
 * ...yet **rapid and free localhost development** still possible:
