@@ -35,12 +35,13 @@ def delete_models():
     for model in response['Models']:
         model_name = model['ModelName']
         print(f"Deleting model: {model_name}")
-        sagemaker_client.delete_model(ModelName=model_name)
+        # Uncomment to actually delete:
+        # sagemaker_client.delete_model(ModelName=model_name)
 
 
 if __name__ == '__main__':
-    #print_endpoints()
+    print_endpoints()
     #delete_endpoints()
 
     print_models()
-    delete_models()
+    #delete_models()
