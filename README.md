@@ -1,4 +1,6 @@
-# PoC for LLM+RAG assistant for company-internal knowledge-base
+# Loka Tech Assignment by Piotr Włodarek (contact@qertoip.com)
+
+PoC for assistant for company-internal knowledge-base (developer documentation).
 
 ## Demo
 
@@ -6,6 +8,8 @@ Deployed on AWS: https://llmrag.qertoip.com/
 
 ## Featuring
 
+* Retrieval Augmented Generation (RAG) pattern / approach.
+ 
 * AWS ready:
   * Deployed on **EC2**
   * Uses **SageMaker Endpoints** for:
