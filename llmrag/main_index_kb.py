@@ -1,5 +1,8 @@
 """
 Run this after knowledge base (KB) gets updated with new documents.
+
+In the future KB-indexing could be map-reduced and/or batched to process
+large volumes of documents quickly.
 """
 import logging as log
 
@@ -23,6 +26,7 @@ def main():
     
     documents_filepaths = list(kb_path().rglob('*.md'))
 
+    # This could be map-reduced, possibly with help of AWS EMR
     for doc_i, doc_path in enumerate(documents_filepaths):
         doc = doc_path.read_text()
         chunks = chunker.chunk(doc)
