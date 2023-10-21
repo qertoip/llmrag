@@ -6,5 +6,3 @@ source .venv/bin/activate
 export PYTHONDONTWRITEBYTECODE=1
 
 python -m piptools sync requirements.txt
-
-rm -rf datacampexam.egg-info
