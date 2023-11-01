@@ -1,4 +1,4 @@
-# Loka Tech Assignment by Piotr Włodarek (contact@qertoip.com)
+# LLM RAG
 
 PoC for assistant for company-internal knowledge-base (developer documentation).
 
