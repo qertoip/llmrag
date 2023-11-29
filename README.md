@@ -1,6 +1,6 @@
 # LLM RAG
 
-PoC for assistant for company-internal knowledge-base (developer documentation).
+PoC for assistant for company-internal knowledge-base.
 
 ## Demo
 
