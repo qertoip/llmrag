@@ -2,10 +2,6 @@
 
 PoC for assistant for company-internal knowledge-base.
 
-## Demo
-
-Deployed on AWS: https://llmrag.qertoip.com/
-
 ## Featuring
 
 * Retrieval Augmented Generation (RAG) pattern / approach.
